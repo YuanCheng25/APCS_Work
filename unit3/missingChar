@@ -1,0 +1,39 @@
+public class missingChar
+{
+public static String missingChar(String str, int n) {
+  String front = str.substring(0, n);
+  String back = str.substring(n+1, str.length());
+  
+  return front + back;
+}
+    }
+
+
+    public static void testBinimate(String s, String expected)
+    {
+        String result = binimate(s);
+
+        System.out.print("s: " + s + " expected: " + expected + " result: " + result);
+        
+        if (result.equals(expected))
+            System.out.print(" I am a winner!");
+        else
+            System.out.print(" I am sad.");
+
+        System.out.println();
+    }
+
+
+    public static void main(String[] args)
+    {
+        System.out.println("Hello, world!");
+
+        // decimate == kill every 1/10
+
+        // unit tests
+
+        testBinimate("Briley", "Bie");
+        testBinimate("Jasmine", "Jsie");
+        testBinimate("Sophia", "Spi");
+    }
+}

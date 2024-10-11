@@ -2,16 +2,22 @@ public class nearHundred
 {
     public static void main(String[] args)
     {
-testnearHundred();
+testnearHundred(false, 6, false);
+testnearHundred(true, 99, true);
+testnearHundred(false, 178, false);
     }
     
-public boolean nearHundred(int n) {
-  return ((Math.abs(100 - n) <= 10) ||
-    (Math.abs(200 - n) <= 10));
+public static boolean nearHundred(int n) {
+    if(Math.abs(result) <= 10 || Math.abs(200 - n))
+  return true;
+    else 
+        return false;
 }
-    result=Math.abs(100-20);
     
- if (Math.abs(result) <= 10 || (Math.abs(200 - n)))
+public static void testHundred(int n, int expected)
+    result=n;
+    
+ if(expected==result) 
      System.out.println("pass");
     else
     System.out.println("fail");
