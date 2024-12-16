@@ -15,7 +15,7 @@ ArrayList<Integer> result = new ArrayList<Integer>();
       int[] values={51,52,53,100};
         ArrayList<Integer> goodScores = filterGoodScores(values);
         System.out.print("good scores: ");
-        for (double value : goodScores)
+        for (int value : goodScores)
             System.out.print(value + " ");
         System.out.println();
         
@@ -23,7 +23,7 @@ ArrayList<Integer> result = new ArrayList<Integer>();
         int[] values2={92,89,90,99};
         ArrayList<Integer> goodScores2=filterGoodScores(values2);
         System.out.print("good scores: ");
-        for (double value : goodScores2)
+        for (int value : goodScores2)
             System.out.print(value + " ");
         System.out.println(); 
     }
