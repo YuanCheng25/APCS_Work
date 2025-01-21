@@ -3,16 +3,16 @@ import java.util.*;
 public class ItemCalculator 
 {
     public static void printItems(ArrayList<Item> items){
-     for (Item a: items)
-         System.out.println(a.getName() + " is worth $" + a.getPrice());
+     for (Item item: items)
+         System.out.println(item.getName() + " is worth $" + item.getPrice());
     }
 
 public static float averagePrice(ArrayList<Item> items)
 {
     float result=0;
-    for(Item a: items)
+    for(Item item: items)
     {
-        result += a.getPrice();
+        result += item.getPrice();
     }
     return result/items.size();
 }
