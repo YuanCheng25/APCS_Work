@@ -7,9 +7,9 @@ public class ItemCalculator
          System.out.println(a.getName() + " is worth $" + a.getPrice());
     }
 
-public static double averagePrice(ArrayList<Item> items)
+public static float averagePrice(ArrayList<Item> items)
 {
-    double result=0;
+    float result=0;
     for(Item a: items)
     {
         result += a.getPrice();
@@ -37,8 +37,8 @@ public static void testAveragePrice() {
     items.add(new Item("Lipstick", 100));
     items.add(new Item("Candle", 20));
     items.add(new Item("Necklace", 30));
-    double expected=50.0;
-    double answer=calculator.averagePrice(items);
+    float expected=50;
+    float answer=calculator.averagePrice(items);
        if(expected==answer)
             System.out.println("Yay");
         else
