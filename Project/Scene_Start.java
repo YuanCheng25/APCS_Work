@@ -3,7 +3,7 @@ import processing.core.*;
 public class Scene_Start implements Scene
 {
     private PApplet p;
-    private float bWidth=200;
+    private float bWidth=170;
     private float bHeight=50;
     private float bX;  
     private float bY;
@@ -34,7 +34,7 @@ public class Scene_Start implements Scene
         p.textSize(85);
         p.text("The Average Game", p.width/2, p.height/3);
         p.textSize(32);
-        p.text("Start", p.width/2, p.height/2);
+        p.text("Start", p.width/2, p.height/2+bHeight/4);
     }
     
 }
