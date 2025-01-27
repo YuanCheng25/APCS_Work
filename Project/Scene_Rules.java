@@ -5,6 +5,7 @@ public class Scene_Rules implements Scene
 {
     private PImage RulesboardImage;
     private PImage cardImage;
+  //  private PImage nextbuttonImage;
     private float cardAlpha = 0; 
     private int startTime; 
     private boolean fadingIn = true; 
@@ -12,11 +13,16 @@ public class Scene_Rules implements Scene
     private boolean fadingOut = false; 
     private PFont customFont;
    
+   String text="How to Play: Everyone must choose a number from 0-100. The average is taken and multiplied by 0.8; the winner is the person with the number closest to the average*0.8. Everyone starts at 0 points; each round, the winners get no points and the losers lose 1 point. When someone reaches -3 points, they are eliminated. The last person left is the winner.";
+   
+   int n=0;
+   
     public Scene_Rules(PApplet p)
     {
         this.p = p;
         RulesboardImage = p.loadImage("rulesboard.jpg");
         cardImage = p.loadImage("card.png");
+     //   nextbuttonImage=p.loadImage("nextbutton.jpg");
         
         customFont = p.createFont("slkscr.ttf", 32); 
         
@@ -64,15 +70,11 @@ public class Scene_Rules implements Scene
         p.fill(255);  
         p.textFont(customFont);
         p.textSize(30);
-        p.text("How to Play:", p.width/2, p.height/4);
-        p.text("Everyone must choose a number from 0-100;", p.width/2, p.height/4+30);
-        p.text("the average is taken and multiplied by 0.8;", p.width/2, p.height/4+60);   
-        p.text("the winner is the person with the number.", p.width/2, p.height/4+90);
-        p.text("closest to the average*0.8.", p.width/2, p.height/4+120);
-        p.text("Everyone starts at 0 points.", p.width/2, p.height/4+150);
-        p.text("Winners +0 points and losers -1 point.", p.width/2, p.height/4+180);
-        p.text("Reach -3 points and you will be eliminated.", p.width/2, p.height/4+210);
-        p.text("The last person left is the winner.", p.width/2, p.height/4+240);
+        String sub=text.substring(0,n);
+        p.textAlign(PApplet.CENTER);
+        p.text(sub, 262, 140, p.width/2, p.height+100);
+        if(p.frameCount%30==0);
+        n++;
         }
         
         p.noTint();
