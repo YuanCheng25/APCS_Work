@@ -1,8 +1,12 @@
 import processing.core.*;
 import java.util.*;
+import processing.sound.*;
 
 public class Game extends PApplet
 {
+
+SoundFile music;
+
     public void settings()
     {
         size(1050, 562);
@@ -16,6 +20,9 @@ public class Game extends PApplet
       //  scenes.add(new Scene_End(this));
 
         current = 0;
+        
+        music=new SoundFile(this, "cdl.mp3");
+        music.loop();
     }
 
     public void draw()
