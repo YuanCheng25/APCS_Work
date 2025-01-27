@@ -1,7 +1,6 @@
 import processing.core.*;
 import java.util.*;
 
-
 public class Game extends PApplet
 {
     public void settings()
