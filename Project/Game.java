@@ -16,6 +16,7 @@ SoundFile music;
     {
         scenes = new ArrayList<Scene>(); 
         scenes.add(new Scene_Start(this));
+        scenes.add(new Scene_Rules(this));
     //    scenes.add(new Scene_Play(this));
       //  scenes.add(new Scene_End(this));
 
