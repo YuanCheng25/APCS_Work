@@ -35,6 +35,7 @@ SoundFile music;
     
     public void keyPressed()
     {
+    if (key == ENTER)
        current++;
        if (current >= scenes.size())
            current = 0;

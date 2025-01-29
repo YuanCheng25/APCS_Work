@@ -5,7 +5,6 @@ public class Scene_Rules implements Scene
 {
     private PImage RulesboardImage;
     private PImage cardImage;
-  //  private PImage nextbuttonImage;
     private float cardAlpha = 0; 
     private int startTime; 
     private boolean fadingIn = true; 
@@ -21,9 +20,7 @@ public class Scene_Rules implements Scene
     {
         this.p = p;
         RulesboardImage = p.loadImage("rulesboard.jpg");
-        cardImage = p.loadImage("card.png");
-     //   nextbuttonImage=p.loadImage("nextbutton.jpg");
-        
+        cardImage = p.loadImage("card.png");        
         customFont = p.createFont("slkscr.ttf", 32); 
         
         }
