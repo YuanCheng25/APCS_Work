@@ -1,10 +1,11 @@
 import processing.core.*;
-
+import gifAnimation.*;
 
 public class Scene_Rules implements Scene
 {
     private PImage RulesboardImage;
     private PImage cardImage;
+    private Gif ChishiyaGif; 
     private float cardAlpha = 0; 
     private int startTime; 
     private boolean fadingIn = true; 
@@ -20,9 +21,10 @@ public class Scene_Rules implements Scene
     {
         this.p = p;
         RulesboardImage = p.loadImage("rulesboard.jpg");
-        cardImage = p.loadImage("card.png");        
+        cardImage = p.loadImage("card.png");   
         customFont = p.createFont("slkscr.ttf", 32); 
         
+    ChishiyaGif=new Gif(p,"ChishiyaBetter.gif");
         }
 
     public void display()
@@ -63,16 +65,24 @@ public class Scene_Rules implements Scene
         
         
         if(fadingOut==false && visible==false && fadingIn==false)
-        {
+        {   
+        p.tint(255,255);
+        p.image(ChishiyaGif,670, 50, p.width/2, p.height+100);
+        ChishiyaGif.loop();
+
         p.fill(255);  
         p.textFont(customFont);
         p.textSize(30);
+        
+        if (n > text.length()) 
+        n = text.length();
+        
         String sub=text.substring(0,n);
         p.textAlign(PApplet.CENTER);
-        p.text(sub, 262, 140, p.width/2, p.height+100);
+        p.text(sub, 190, 140, p.width/2+80, p.height+50);
         if(p.frameCount%30==0);
         n++;
-        }
+                }
         
         p.noTint();
         }

@@ -19,7 +19,7 @@ public class Scene_Play implements Scene
     public Scene_Rules(PApplet p)
     {
         this.p = p;
-        RulesboardImage = p.loadImage("rulesboard.jpg");
+        RulesboardImage = p.loadImage("interesting.jpg");
         cardImage = p.loadImage("card.png");        
         customFont = p.createFont("slkscr.ttf", 32); 
         
