@@ -1,80 +1,95 @@
-import processing.core.*;
+import processing.core.PApplet;
+import processing.core.PImage;
+import gifAnimation.*;
 
 
-public class Scene_Play implements Scene
-{
-  //  private PImage RulesboardImage;
- //   private PImage cardImage;
-    private float cardAlpha = 0; 
-    private int startTime; 
-    private boolean fadingIn = true; 
-    private boolean visible = false; 
-    private boolean fadingOut = false; 
-    private PFont customFont;
-   
-   String text="Player 1, enter your number.";
-   
-   int n=0;
-   
-    public Scene_Rules(PApplet p)
-    {
+public class Scene_Play implements Scene {
+    private PApplet p;
+    private Player[] players;
+    private int currentPlayerIndex;
+  private PImage backgroundSky;
+   private PImage[] playerImages; // Array to store player images
+    
+    public Scene_Play(PApplet p) {
         this.p = p;
-        RulesboardImage = p.loadImage("interesting.jpg");
-        cardImage = p.loadImage("card.png");        
-        customFont = p.createFont("slkscr.ttf", 32); 
-        
-        }
+        backgroundSky=p.loadImage("sky.png");
 
-    public void display()
-    {
-        p.image(RulesboardImage, 0, 0, p.width, p.height);
-        
-        if (fadingIn) {
-            cardAlpha += 5; 
-            if (cardAlpha >= 255) {
-                cardAlpha = 255;  
-                fadingIn = false;
-                visible = true;  
-                startTime = p.millis(); 
-            }
-        } else if (visible) {
-            if (p.millis() - startTime >= 2700) {
-                visible = false;
-                fadingOut = true;
-            }
-        } else if (fadingOut) {
-            cardAlpha -= 5;  
-           if (cardAlpha <= 0) {
-                cardAlpha = 0;  
-                fadingOut = false;  
-            }
-        }
+        players = new Player[3];
+        playerImages = new PImage[3]; // Initialize the image array
 
-        p.tint(255, cardAlpha);  
-        p.image(cardImage, p.width/5, p.height/5, 244, 356); 
-                 
-        p.textFont(customFont);
+        // Load images for each player
+        playerImages[0] = p.loadImage("player01.gif"); // Replace with your image file path
+        playerImages[1] = p.loadImage("hatter.png"); // Replace with your image file path
+        playerImages[2] = p.loadImage("alice3.png"); // Replace with your image file path
 
-        p.fill(255, cardAlpha);        
-        p.textSize(90);
-        p.text("Round 1", p.width/2, p.height/3+100);        
-        
-        if(fadingOut==false && visible==false && fadingIn==false)
-        {
-        p.fill(255);  
-        p.textFont(customFont);
-        p.textSize(30);
-        String sub=text.substring(0,n);
-        p.textAlign(PApplet.CENTER);
-        p.text(sub, 262, 140, p.width/2, p.height+100);
-        if(p.frameCount%30==0);
-        n++;
+        for (int i = 0; i < players.length; i++) {
+            players[i] = new Player();
         }
-        
-        p.noTint();
-        }
-        
-        private PApplet p;
+        currentPlayerIndex = 0;
     }
 
+    public void display() {
+       p.background(17,23,30);
+       p.image(backgroundSky, 0, 0, p.width, p.height);
 
+           // Display the current player's image with proportional scaling
+        PImage currentImage = playerImages[currentPlayerIndex];
+        float aspectRatio = (float) currentImage.width / currentImage.height; // Calculate aspect ratio
+        float imageHeight = p.height * 0.5f; // Set height to 50% of the screen height
+        float imageWidth = imageHeight * aspectRatio; // Calculate width based on aspect ratio
+
+        // Center the image horizontally and move it slightly up
+        float x = (p.width - imageWidth) / 2;
+        float y = p.height * 0.05f; // Position the image 5% from the top (moved up)
+
+        p.image(currentImage, x, y, imageWidth, imageHeight); 
+     
+        // Display the current player's input and value
+        players[currentPlayerIndex].display();
+    }
+
+    public void keyPressed() {
+        players[currentPlayerIndex].keyPressed();
+        if (players[currentPlayerIndex].isInputComplete()) {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+        }
+    }
+
+    private class Player {
+        String input = "";
+        int value = 0;
+        boolean inputComplete = false;
+
+        public void display() {
+            p.textSize(32);
+            p.textAlign(PApplet.CENTER, PApplet.CENTER);
+
+            // Display instructions and input
+            p.text("Player " + (currentPlayerIndex + 1) + ", enter an integer between 0-100:", p.width / 2, 300);
+            p.text("Input: " + input, p.width / 2, 350);
+            p.text("Value: " + value, p.width / 2, 400);
+        }
+
+        public void keyPressed() {
+            if (p.key == PApplet.BACKSPACE && input.length() > 0) {
+                input = input.substring(0, input.length() - 1);
+            } else if (p.key == ' ') { // Use SPACE key to submit input
+                try {
+                    if (!input.isEmpty()) {
+                        value = Integer.parseInt(input); // Parse input to integer
+                        inputComplete = true; // Mark input as complete
+                    }
+                } catch (NumberFormatException e) {
+                    // Handle invalid input (e.g., non-numeric input)
+                    input = ""; // Clear input
+                }
+            } else if (Character.isDigit(p.key)) {
+                input += p.key; // Append digit to input
+            }
+        }
+
+        public boolean isInputComplete() {
+            return inputComplete;
+        }
+    }
+}

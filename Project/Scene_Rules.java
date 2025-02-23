@@ -20,7 +20,7 @@ public class Scene_Rules implements Scene
     public Scene_Rules(PApplet p)
     {
         this.p = p;
-        RulesboardImage = p.loadImage("rulesboard.jpg");
+        RulesboardImage = p.loadImage("rulesboard2.jpg");
         cardImage = p.loadImage("card.png");   
         customFont = p.createFont("slkscr.ttf", 32); 
         
@@ -86,6 +86,10 @@ public class Scene_Rules implements Scene
         
         p.noTint();
         }
+        
+        public void keyPressed() {
+        // This scene doesn't need special key handling, but we must implement the method
+    }
         
         private PApplet p;
     }

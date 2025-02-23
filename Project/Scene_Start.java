@@ -40,4 +40,8 @@ public class Scene_Start implements Scene
         p.text("The Average Game", p.width/2, p.height/3);
     }
     
+    public void keyPressed() {
+        // This scene doesn't need special key handling, but we must implement the method
+    }
+    
 }
