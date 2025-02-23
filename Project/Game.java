@@ -21,6 +21,7 @@ private int value;
         scenes.add(new Scene_Start(this));
         scenes.add(new Scene_Rules(this));
         scenes.add(new Scene_Play(this));
+    //    scenes.add(new Scene_Play2(this));
       //  scenes.add(new Scene_End(this));
 
         current = 0;

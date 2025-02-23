@@ -33,7 +33,7 @@ public class Player extends PApplet {
             input += key;
         }
     }
-} */
+} 
 
 
 import processing.core.PApplet;
@@ -74,3 +74,4 @@ public class Player extends PApplet {
         }
     }
 }
+*/
