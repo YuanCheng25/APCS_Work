@@ -10,39 +10,39 @@ public class Scene_Start implements Scene
     private float bX;  
     private float bY;
     private Gif backgroundGif; 
- //   private PImage buttonImage;
-  //  private PFont customFont;
         
     public Scene_Start(PApplet p)
     {
         this.p = p;
         bX=p.width/2-bWidth/2;
         bY=p.height/2-bHeight/2;
-      backgroundGif=new Gif(p,"Heading.gif");
+      backgroundGif=new Gif(p,"avg3.gif");
       backgroundGif.loop();
-     //  buttonImage=p.loadImage("jabberwocky.png");
-        
-      //  customFont = p.createFont("slkscr.ttf", 32); 
     }
 
     public void display()
     {
-       p.image(backgroundGif, 0, 0, p.width, p.height);
-     //  p.image(backgroundGif, bX, bY, bWidth, bHeight);
-        
-       // p.fill(41,61,61);
-        
-  //      p.textFont(customFont);
+   p.smooth();
+   float gifAspectRatio = (float) backgroundGif.width / backgroundGif.height;
+    float screenAspectRatio = (float) p.width / p.height;
 
-    //    p.fill(255,255,255);
-  //      p.textAlign(PApplet.CENTER);
-   //     p.textSize(50);
-   //     p.text("The Average Game", p.width/2, p.height/3);
+    float scale;
+    float offsetX = 0, offsetY = 0;
+
+    if (gifAspectRatio > screenAspectRatio) {
+        scale = (float) p.height / backgroundGif.height;
+        offsetX = (p.width - backgroundGif.width * scale) / 2;
+    } else {
+        scale = (float) p.width / backgroundGif.width;
+        offsetY = (p.height - backgroundGif.height * scale) / 2;
+    }
+
+    p.image(backgroundGif, offsetX, offsetY, backgroundGif.width * scale, backgroundGif.height * scale);
         
     }
     
     public void keyPressed() {
-        // This scene doesn't need special key handling, but we must implement the method
     }
     
 }
+

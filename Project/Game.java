@@ -12,7 +12,9 @@ private int value;
 
     public void settings()
     {
-        size(1050, 562);
+       // size(1050, 562);
+       smooth(2);
+       fullScreen();
     }
 
     public void setup()
@@ -26,8 +28,9 @@ private int value;
 
         current = 0;
         
-        music=new SoundFile(this, "cdl.mp3");
+        music=new SoundFile(this, "chesstype.mp3");
         music.loop();
+        
     }
 
     public void draw()
@@ -49,20 +52,6 @@ private int value;
         scenes.get(current).keyPressed();
 
         } 
-      /*  else if (current == 2) {
-            if (key == BACKSPACE && input.length() > 0) {
-                input = input.substring(0, input.length() - 1);
-            } 
-            else if (key == ENTER) {
-                    value = Integer.parseInt(input);
-                    input = ""; 
-            
-            } 
-            else if (Character.isDigit(key)) {
-                input += key;
-            }
-        } 
-        }*/
 
     private ArrayList<Scene> scenes;
     private int current;

@@ -12,15 +12,15 @@ public class Scene_Play implements Scene {
     
     public Scene_Play(PApplet p) {
         this.p = p;
-        backgroundSky=p.loadImage("sky.png");
+        backgroundSky=p.loadImage("bg0.png");
 
         players = new Player[3];
         playerImages = new PImage[3]; // Initialize the image array
 
         // Load images for each player
-        playerImages[0] = p.loadImage("player01.gif"); // Replace with your image file path
-        playerImages[1] = p.loadImage("hatter.png"); // Replace with your image file path
-        playerImages[2] = p.loadImage("alice3.png"); // Replace with your image file path
+        playerImages[0] = p.loadImage("alice3.png"); // Replace with your image file path
+        playerImages[1] = p.loadImage("dumdum.png"); // Replace with your image file path
+        playerImages[2] = p.loadImage("hatter.png"); // Replace with your image file path
 
         for (int i = 0; i < players.length; i++) {
             players[i] = new Player();
@@ -65,9 +65,10 @@ public class Scene_Play implements Scene {
             p.textAlign(PApplet.CENTER, PApplet.CENTER);
 
             // Display instructions and input
-            p.text("Player " + (currentPlayerIndex + 1) + ", enter an integer between 0-100:", p.width / 2, 300);
-            p.text("Input: " + input, p.width / 2, 350);
-            p.text("Value: " + value, p.width / 2, 400);
+            p.fill(0);
+            p.text("Player " + (currentPlayerIndex + 1) + ", enter an integer between 0-100 without other players seeing your number:", p.width / 2, 600);
+            p.text("Input: " + input, p.width / 2, 650);
+            p.text("Value: " + value, p.width / 2, 700);
         }
 
         public void keyPressed() {
