@@ -17,7 +17,7 @@ public class Scene_Rules implements Scene
     private PImage normal;
   // private SoundFile music2;
    
-    String text = "Everyone must choose a number from 0-100. The average is taken and multiplied by 0.8; the winner is the person with the number closest to the average*0.8. Everyone starts at 0 points; each round, the winners get no points and the losers lose 1 point. When someone reaches -2 points, they are eliminated. The last person left is the winner.";
+    String text = "All 3 players must choose a number from 0-100. The average is taken and multiplied by 0.8; the winner is the person with the number closest to the average*0.8. Everyone starts at 0 points; each round, the winners get no points and the losers lose 1 point. When someone reaches -2 points, they are eliminated. The last person left is the winner.";
    
     int n = 0;
    
@@ -120,7 +120,7 @@ public class Scene_Rules implements Scene
             p.textAlign(PApplet.LEFT, PApplet.CENTER);
            // p.text(sub, 190, 140, p.width / 2 + 80, p.height + 50);
            p.textLeading(45);
-           p.text(sub, 70, 180, textX+200, textY + 400);
+           p.text(sub, 70, 190, textX+200, textY + 400);
             
            if (p.frameCount % 0.0000001 == 0)
                 n++;
