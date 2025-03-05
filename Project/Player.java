@@ -1,77 +1,37 @@
-/*import processing.core.PApplet;
+import java.util.ArrayList;
+import processing.core.*;
 
-public class Player extends PApplet {
-    String input = ""; // To store user input
-    int value = 0;
+public class Player {
+    private String name;
+    private int points;
+    private boolean isAlive;
+    private int currentNumber;
 
-    public static void main(String[] args) {
-        PApplet.main("Player");
+    public Player(String name) {
+        this.name = name;
+        this.points = 0;
+        this.isAlive = true;
+        this.currentNumber = -1; // Default invalid number
     }
 
-    public void settings() {
-        size(400, 300);
-    }
+    public String getName() { return name; }
+    public int getPoints() { return points; }
+    public boolean getIsAlive() { return isAlive; }
+    public int getCurrentNumber() { return currentNumber; }
 
-    public void setup() {
-        textSize(32);
-    }
-
-    public void draw() {
-        background(200);
-        fill(0);
-        text("Enter a number:", 50, 100);
-        text(input, 50, 150);
-        text(value, 50, 200);
-    }
-
-    public void keyPressed() {
-        if (key == BACKSPACE && input.length() > 0) {
-            input = input.substring(0, input.length() - 1);
-        } else if (key == ENTER || key == RETURN) {
-            value = Integer.parseInt(input);
-        } else if (Character.isDigit(key)) {
-            input += key;
+    public void setCurrentNumber(int number) {
+        if (number >= 0 && number <= 100) {
+            this.currentNumber = number;
         }
     }
-} 
 
-
-import processing.core.PApplet;
-
-public class Player extends PApplet {
-    String input = ""; // To store user input
-    int value = 0;
-    int playerNumber; // To identify which player this is
-
-    public Player(int playerNumber) {
-        this.playerNumber = playerNumber;
+    public void setPoints(int newPoints) {
+        this.points = newPoints;
     }
 
-    public void settings() {
-        size(400, 300);
-    }
-
-    public void setup() {
-        textSize(32);
-    }
-
-    public void draw() {
-        background(200);
-        fill(0);
-        text("Player " + playerNumber + " Enter a number:", 50, 100);
-        text(input, 50, 150);
-        text("Value: " + value, 50, 200);
-    }
-
-    public void keyPressed() {
-        if (key == BACKSPACE && input.length() > 0) {
-            input = input.substring(0, input.length() - 1);
-        } else if (key == ENTER || key == RETURN) {
-            value = Integer.parseInt(input);
-            input = ""; // Clear input after pressing Enter
-        } else if (Character.isDigit(key)) {
-            input += key;
-        }
+    public void losePoints() {
+        points--;
+        if (points <= -3) isAlive = false; // Eliminated when points reach -3
     }
 }
-*/
+
