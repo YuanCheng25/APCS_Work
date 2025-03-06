@@ -1,38 +1,47 @@
-import processing.core.PApplet;
+/*import processing.core.PApplet;
 import processing.core.PImage;
 import gifAnimation.*;
+import java.util.ArrayList;
+
 
 
 public class Scene_Play implements Scene {
     private PApplet p;
-    private Player[] players;
-    private int currentPlayerIndex;
+  //  private Player[] players;
+        private ArrayList<Player>players;
+    private int currentPlayerIndex=0;
   private PImage backgroundSky;
-   private PImage[] playerImages; // Array to store player images
+  // private PImage[] playerImages; // Array to store player images
+            private String input = "";
+    private int value = 0;
     
-    public Scene_Play(PApplet p) {
+    public Scene_Play(PApplet p, ArrayList<Player>players) {
         this.p = p;
+        this.players = players;
         backgroundSky=p.loadImage("blk.png");
 
-        players = new Player[3];
+     /*   players = new Player[3];
         playerImages = new PImage[3]; // Initialize the image array
 
         // Load images for each player
         playerImages[0] = p.loadImage("eye2.png"); // Replace with your image file path
         playerImages[1] = p.loadImage("chess2.png"); // Replace with your image file path
-        playerImages[2] = p.loadImage("cat.png"); // Replace with your image file path
+        playerImages[2] = p.loadImage("cat.png"); // Replace with your image file path*/
 
-        for (int i = 0; i < players.length; i++) {
+      /*  for (int i = 0; i < players.length; i++) {
             players[i] = new Player();
-        }
-        currentPlayerIndex = 0;
+        }*/
+    //    currentPlayerIndex = 0;
+        
+   /* Player currentPlayer = players.get(currentPlayerIndex);
+
     }
 
     public void display() {
        p.background(17,23,30);
        p.image(backgroundSky, 0, 0, p.width, p.height);
 
-           // Display the current player's image with proportional scaling
+      /*     // Display the current player's image with proportional scaling
         PImage currentImage = playerImages[currentPlayerIndex];
         float aspectRatio = (float) currentImage.width / currentImage.height; // Calculate aspect ratio
         float imageHeight = p.height * 0.5f; // Set height to 50% of the screen height
@@ -42,26 +51,27 @@ public class Scene_Play implements Scene {
         float x = (p.width - imageWidth) / 2;
         float y = p.height * 0.05f; // Position the image 5% from the top (moved up)
 
-        p.image(currentImage, x, y, imageWidth, imageHeight); 
+        p.image(currentImage, x, y, imageWidth, imageHeight); */
      
         // Display the current player's input and value
-        players[currentPlayerIndex].display();
-    }
+       // players[currentPlayerIndex].display();
+   // currentPlayer.display();
 
-    public void keyPressed() {
+
+   /* public void keyPressed() {
         players[currentPlayerIndex].keyPressed();
         if (players[currentPlayerIndex].isInputComplete()) {
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         }
-    }
+    }*/
 
-    private class Player {
-        String input = "";
+   // private class Player {
+  /*      String input = "";
         int value = 0;
         boolean inputComplete = false;
-
-        public void display() {
-            p.textSize(32);
+*/
+        
+       /*     p.textSize(32);
             p.textAlign(PApplet.CENTER, PApplet.CENTER);
 
             // Display instructions and input
@@ -73,10 +83,32 @@ public class Scene_Play implements Scene {
             p.text("Input: " + input, p.width / 2, 700);
             p.text("Value: " + value, p.width / 2, 750);
             p.text("Press 'Space' upon completion", p.width / 2, 850);
-            p.text("to confirm your choice.", p.width / 2, 900);
+            p.text("to confirm your choice.", p.width / 2, 900);*/
+        
+        
+//}
+    
+   /* public void keyPressed() {
+        
+        if (p.key == PApplet.BACKSPACE && input.length() > 0) {
+            input = input.substring(0, input.length() - 1);
+        } else if (p.key == ' ') { // Use SPACE key to submit input
+            try {
+                if (!input.isEmpty()) {
+                    value = Integer.parseInt(input); // Parse input to integer
+                    currentPlayer.setInputComplete(true); // Mark input as complete
+                }
+            } catch (NumberFormatException e) {
+                // Handle invalid input (e.g., non-numeric input)
+                input = ""; // Clear input
+            }
+        } else if (Character.isDigit(p.key)) {
+            input += p.key; // Append digit to input
         }
+    }
+}*/
 
-        public void keyPressed() {
+      /*  public void keyPressed() {
             if (p.key == PApplet.BACKSPACE && input.length() > 0) {
                 input = input.substring(0, input.length() - 1);
             } else if (p.key == ' ') { // Use SPACE key to submit input
@@ -97,13 +129,13 @@ public class Scene_Play implements Scene {
         public boolean isInputComplete() {
             return inputComplete;
         }
-    }
-}
+    }*/
+//}
 
-/*import processing.core.PApplet;
-import processing.core.PImage;
+//import processing.core.PApplet.*;
+//import processing.core.PImage;
 
-public class Scene_Play implements Scene {
+/*public class Scene_Play implements Scene {
     private PApplet p;
     private Player[] players;
     private int currentPlayerIndex;
@@ -200,3 +232,58 @@ public class Scene_Play implements Scene {
     }
 }
 */
+
+   // import processing.core.PApplet.*;
+//import processing.core.PImage;
+    import processing.core.*;
+import java.util.ArrayList;
+
+public class Scene_Play implements Scene {
+    private PApplet p;
+    private ArrayList<Player> players;
+        private ArrayList<PImage> playerImages;
+      private String input = "";
+        private int value = 0;
+        private boolean inputComplete = false;
+
+
+    private int currentPlayerIndex = 0;
+    private PImage backgroundSky;
+
+    public Scene_Play(PApplet p, ArrayList<Player> players) {
+        this.p = p;
+        this.players = players;
+        backgroundSky = p.loadImage("blk.png");
+    }
+
+    public void display() {
+        p.background(17, 23, 30);
+        p.image(backgroundSky, 0, 0, p.width, p.height);
+
+        // Display the current player's input and value
+        players.get(currentPlayerIndex).display();
+    }
+
+    public void keyPressed() {
+        players.get(currentPlayerIndex).keyPressed();
+                if (p.key == PApplet.BACKSPACE && input.length() > 0) {
+            input = input.substring(0, input.length() - 1);
+        } else if (p.key == ' ') { // Use SPACE key to submit input
+            try {
+                if (!input.isEmpty()) {
+                    value = Integer.parseInt(input); // Parse input to integer
+                    inputComplete = true; // Mark input as complete
+                }
+            } catch (NumberFormatException e) {
+                // Handle invalid input (e.g., non-numeric input)
+                input = ""; // Clear input
+            }
+        } else if (Character.isDigit(p.key)) {
+            input += p.key; // Append digit to input
+        }
+        
+        if (players.get(currentPlayerIndex).isInputComplete()) {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        }
+    }
+}

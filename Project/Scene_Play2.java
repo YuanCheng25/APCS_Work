@@ -293,21 +293,25 @@ public class Scene_Play2 implements Scene {
         
     }
 }*/
-
+/*
 import processing.core.PApplet;
+import processing.core.*;
+import java.util.ArrayList;
 
 public class Scene_Play2 implements Scene {
     private PApplet p;
-    private Player[] players;
+ //   private Player[] players;
     private int round;
     private float average;
     private float target;
     private Game game;
+        private ArrayList<Player>players;
+
 
     public Scene_Play2(PApplet p) {
         this.p = p;
         this.game = (Game) p;
-        players = new Player[3]; // Same player array as in Scene_Play
+//players = new ArrayList<>(); // Dynamic ArrayList
         round = 1;
     }
 
@@ -318,7 +322,7 @@ public class Scene_Play2 implements Scene {
         // Calculate the average and target (average * 0.8)
         int total = 0;
         for (Player player : players) {
-            total += player.value;
+            total += player.getCurrentNumber();
         }
         average = total / players.length;
         target = average * 0.8f;
@@ -331,9 +335,9 @@ public class Scene_Play2 implements Scene {
         p.text("Target (Average * 0.8): " + target, p.width / 2, 150);
 
         // Display each player's input
-        for (int i = 0; i < players.length; i++) {
-            p.text("Player " + (i + 1) + " Input: " + players[i].value, p.width / 2, 200 + (i * 50));
-        }
+  for (int i = 0; i < players.size(); i++) {
+    p.text("Player " + (i + 1) + " Input: " + players.get(i).getValue(), p.width / 2, 200 + (i * 50));
+}
 
         // Calculate and display results
         calculateWinner();
@@ -376,21 +380,20 @@ public class Scene_Play2 implements Scene {
         p.fill(0, 255, 0); // Green for winner
         p.text("Winner: Player " + (getPlayerIndex(winner) + 1), p.width / 2, 400);
     }
-
-    private int getPlayerIndex(Player player) {
-        for (int i = 0; i < players.length; i++) {
-            if (players[i] == player) {
-                return i;
-            }
+private int getPlayerIndex(Player players) {
+    for (int i = 0; i < players.size(); i++) {
+        if (players.get(i) == players) {
+            return i;
         }
-        return -1;
     }
+    return -1; // Return -1 if the player is not found
+}
 
-    public void setPlayers(Player[] players) {
+    public void setPlayers(Player players) {
         this.players = players;
     }
 
-    private class Player {
+  /*  private class Player {
         int value = 0;
         int points = 0;
         boolean inputComplete = false;
@@ -402,5 +405,204 @@ public class Scene_Play2 implements Scene {
         public int getValue() {
             return value;
         }
+    }*/
+//}
+    
+/*import processing.core.PApplet;
+import java.util.ArrayList;
+
+public class Scene_Play2 implements Scene {
+    private PApplet p;
+    private ArrayList<Player> players; // Use ArrayList for dynamic player list
+    private int round;
+    private float average;
+    private float target;
+    private Game game;
+
+    public Scene_Play2(PApplet p) {
+        this.p = p;
+        this.game = (Game) p;
+        this.players = new ArrayList<>(); // Initialize the ArrayList
+        round = 1;
     }
+
+    public void display() {
+        p.background(17, 23, 30);
+        p.fill(255);
+
+        // Calculate the average and target (average * 0.8)
+        int total = 0;
+        for (Player player : players) {
+            total += player.getCurrentNumber(); // Assuming getCurrentNumber() is a public method in Player
+        }
+        average = total / players.size(); // Use size() for ArrayList
+        target = average * 0.8f;
+
+        // Display round information
+        p.textSize(32);
+        p.textAlign(PApplet.CENTER, PApplet.CENTER);
+        p.text("Round: " + round, p.width / 2, 50);
+        p.text("Average: " + average, p.width / 2, 100);
+        p.text("Target (Average * 0.8): " + target, p.width / 2, 150);
+
+        // Display each player's input
+        for (int i = 0; i < players.size(); i++) {
+            p.text("Player " + (i + 1) + " Input: " + players.get(i).getValue(), p.width / 2, 200 + (i * 50));
+        }
+
+        // Calculate and display results
+        calculateWinner();
+    }
+
+    public void keyPressed() {
+        // Move to next round or scene when space key is pressed
+        if (p.key == PApplet.ENTER) {
+            for (Player player : players) {
+                player.setInputComplete(false); // Use a setter method to reset inputComplete
+            }
+            game.nextScene();
+        }
+    }
+
+    private void calculateWinner() {
+        // Find the player with the closest value to the target (average * 0.8)
+        Player winner = players.get(0); // Use get() for ArrayList
+        float closestDiff = Math.abs(winner.getValue() - target); // Use getter for value
+
+        for (Player player : players) {
+            float diff = Math.abs(player.getValue() - target); // Use getter for value
+            if (diff < closestDiff) {
+                winner = player;
+                closestDiff = diff;
+            }
+        }
+
+        // Update points
+        for (Player player : players) {
+            if (player == winner) {
+                player.setPoints(player.getPoints() + 0); // Winner gets 0 points (no change)
+            } else {
+                player.setPoints(player.getPoints() - 1); // Losers lose 1 point
+            }
+        }
+
+        // Display winner
+        p.textSize(40);
+        p.fill(0, 255, 0); // Green for winner
+        p.text("Winner: Player " + (getPlayerIndex(winner) + 1), p.width / 2, 400);
+    }
+
+    private int getPlayerIndex(Player player) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i) == player) {
+                return i;
+            }
+        }
+        return -1; // Return -1 if the player is not found
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players; // Set the ArrayList of players
+    }
+}*/
+
+import processing.core.*;
+import java.util.ArrayList;
+
+public class Scene_Play2 implements Scene {
+    private PApplet p;
+    private ArrayList<Player> players;
+    private int round;
+    private float average;
+    private float target;
+    private Game game;
+
+    public Scene_Play2(PApplet p) {
+        this.p = p;
+        this.game = (Game) p;
+        this.players = new ArrayList<>();
+      //  this.players =players;
+        round = 1;
+    }
+
+   /* public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }*/
+    
+    public void display() {
+        p.background(17, 23, 30);
+        p.fill(255);
+
+        // Calculate the average and target (average * 0.8)
+        int total = 0;
+        for (Player player : players) {
+            total += player.getValue();
+        }
+        average = total / players.size();
+        target = average * 0.8f;
+
+        // Display round information
+        p.textSize(32);
+        p.textAlign(PApplet.CENTER, PApplet.CENTER);
+        p.text("Round: " + round, p.width / 2, 50);
+        p.text("Average: " + average, p.width / 2, 100);
+        p.text("Target (Average * 0.8): " + target, p.width / 2, 150);
+
+        // Display each player's input
+        for (int i = 0; i < players.size(); i++) {
+            p.text("Player " + (i + 1) + " Input: " + players.get(i).getValue(), p.width / 2, 200 + (i * 50));
+        }
+
+        // Calculate and display results
+        calculateWinner();
+    }
+
+    public void keyPressed() {
+        // Move to next round or scene when space key is pressed
+        if (p.key == PApplet.ENTER) {
+            for (Player player : players) {
+                player.setInputComplete(false);
+            }
+            game.nextScene();
+        }
+    }
+
+    private void calculateWinner() {
+        // Find the player with the closest value to the target (average * 0.8)
+        Player winner = players.get(0);
+        float closestDiff = Math.abs(winner.getValue() - target);
+
+        for (Player player : players) {
+            float diff = Math.abs(player.getValue() - target);
+            if (diff < closestDiff) {
+                winner = player;
+                closestDiff = diff;
+            }
+        }
+
+        // Update points
+        for (Player player : players) {
+            if (player == winner) {
+                player.setPoints(player.getPoints() + 1); // Winner gains 1 point
+            } else {
+                player.setPoints(player.getPoints() - 1); // Losers lose 1 point
+            }
+        }
+
+        // Display winner
+        p.textSize(40);
+        p.fill(0, 255, 0); // Green for winner
+        p.text("Winner: Player " + (getPlayerIndex(winner) + 1), p.width / 2, 400);
+    }
+
+    private int getPlayerIndex(Player player) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i) == player) {
+                return i;
+            }
+        }
+        return -1; // Return -1 if the player is not found
+    }
+
+
 }

@@ -2,6 +2,7 @@ import processing.core.*;
 import gifAnimation.*;
 
 
+
 public class Scene_Start implements Scene
 {
     private PApplet p;
@@ -11,6 +12,8 @@ public class Scene_Start implements Scene
     private float bY;
     private Gif backgroundGif; 
     private PFont customFont;
+        private String input = "";
+    private int value = 0;
         
     public Scene_Start(PApplet p)
     {
