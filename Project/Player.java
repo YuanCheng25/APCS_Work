@@ -368,6 +368,7 @@ public class Player implements Scene {
     private PImage playerImage;
     private PApplet p;
     private ArrayList<Player> players;
+    private boolean hasLostPoint;
 
 public Player(String name, PImage playerImage, PApplet p) {
     this.name = name;
@@ -379,6 +380,8 @@ public Player(String name, PImage playerImage, PApplet p) {
     this.input = "";
     this.value = 0;
     this.inputComplete = false;
+    this.hasLostPoint = false; // Initialize to false
+    
 }
     
     public String getName() { return name; }
@@ -387,7 +390,11 @@ public Player(String name, PImage playerImage, PApplet p) {
     public int getCurrentNumber() { return currentNumber; }
     public boolean isInputComplete() { return inputComplete; }
     public int getValue() { return value; }
+  public boolean hasLostPoint() {return hasLostPoint; }
 
+    public void setHasLostPoint(boolean hasLostPoint) {
+        this.hasLostPoint = hasLostPoint;
+    }
     public void setCurrentNumber(int number) {
         if (number >= 0 && number <= 100 && isInputComplete()) {
             this.currentNumber = number;
@@ -448,8 +455,8 @@ public Player(String name, PImage playerImage, PApplet p) {
         this.inputComplete = inputComplete;
     }
 
-    public void setPoints(int newPoints) {
-        this.points = newPoints;
+   public void setPoints(int points) {
+        this.points = points;
     }
 
     public void losePoints() {

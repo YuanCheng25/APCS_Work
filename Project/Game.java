@@ -233,15 +233,22 @@ public class Game extends PApplet {
     private int current;
     private ArrayList<Player> players;
     private ArrayList<PImage> playerImages;
+    private Scene currentScene;
 
     public void settings() {
         smooth(2);
         fullScreen();
     }
 
+  /*      public void setPlayers(ArrayList<Player> players) {
+        this.players = new ArrayList<>();
+    }*/
+    
     public void setup() {
         scenes = new ArrayList<Scene>();
         players = new ArrayList<>();
+        currentScene = new Scene_Play(this, players, this);
+
 
         // Load player images into the ArrayList
         current = 0;
@@ -263,9 +270,8 @@ public class Game extends PApplet {
         // Initialize scenes
         scenes.add(new Scene_Start(this));
         scenes.add(new Scene_Rules(this));
-        scenes.add(new Scene_Play(this, players));
-        scenes.add(new Scene_Play2(this));
-    //    ((Scene_Play2) scenes.get(2)).setPlayers(players);
+        scenes.add(new Scene_Play(this, players, this));
+        scenes.add(new Scene_Play2(this, players, this));
     }
 
     public void draw() {
@@ -291,7 +297,11 @@ public class Game extends PApplet {
             current = 0; // Loops back to the first scene if at the end
         }
     }
-
+    
+ public void setScene(Scene newScene) {
+        this.currentScene = newScene; // Update the current scene
+    }
+    
     public static void main(String[] args) {
         PApplet.main("Game");
     }
