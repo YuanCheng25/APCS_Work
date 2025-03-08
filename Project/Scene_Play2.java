@@ -235,6 +235,7 @@ endRound();
 
 import processing.core.*;
 import java.util.ArrayList;
+import gifAnimation.*;
 
 public class Scene_Play2 implements Scene {
     private PApplet p;
@@ -244,12 +245,24 @@ public class Scene_Play2 implements Scene {
     private int currentPlayerIndex = 0;
     private ArrayList<Winner> winners;
     private boolean winnerCalculated = false;
+    private float cardAlpha2 = 0; 
+    private int startTime2; 
+    private boolean fadingIn2 = true; 
+    private boolean visible2 = false; 
+    private boolean fadingOut2 = false; 
+    private Gif round1Gif; 
+    private PImage roundImage;
+
 
     public Scene_Play2(PApplet p, ArrayList<Player> players, Game game) {
         this.p = p;
         this.game = (Game) p;
         this.players = players;
         this.round = 1;
+        
+      round1Gif=new Gif(p,"card.gif");
+      round1Gif.loop();
+        //roundImage=p.loadImage("girl.png");
     }
 
     public double calculateAverageAndTarget() {
@@ -302,17 +315,51 @@ public class Scene_Play2 implements Scene {
 
     public void display() {
         p.background(0);
-        p.fill(255);
-        p.textSize(32);
+        
+        float fadeSpeed = 0.1f;
+        
+        if (fadingIn2) {
+            cardAlpha2 += 7; 
+            if (cardAlpha2 >= 255) {
+                cardAlpha2 = 255;  
+                fadingIn2 = false;
+                visible2 = true;  
+                startTime2 = p.millis(); 
+            }
+        } else if (visible2) {
+            if (p.millis() - startTime2 >= 2700) {
+                visible2 = false;
+                fadingOut2 = true;
+            }
+        } else if (fadingOut2) {
+            cardAlpha2 -= 2;  
+            if (cardAlpha2 <= 0) {
+                cardAlpha2 = 0;  
+                fadingOut2 = false;  
+            }
+        }
+
+        // Apply the same alpha to both the card and the text
+        p.tint(255, cardAlpha2);  
+        p.fill(255, cardAlpha2);
+        p.textSize(60);
         p.textAlign(PApplet.CENTER, PApplet.CENTER);
-        p.text("Round: " + round, p.width / 2, 50);
+        p.text("Round " + round, p.width / 2, p.height/2+150);
+       // p.image(roundImage, (p.width - roundImage.width) / 2, p.height/2-300, roundImage.width, roundImage.height);
+        p.image(round1Gif, (p.width - round1Gif.width) / 2, p.height/2-230, round1Gif.width, round1Gif.height);
+        p.noTint();
+        
+       
+        if (fadingOut2 == false && visible2 == false && fadingIn2 == false)
+        {  
+        p.textSize(35);
+        p.fill(255);
         p.text("Target (Average * 0.8): " + calculateAverageAndTarget(), p.width / 2, 150);
 
         // Display each player's input
         for (int i = 0; i < players.size(); i++) {
             p.text("Player " + (i + 1) + " Input: " + players.get(i).getValue(), p.width / 2, 200 + (i * 50));
         }
-
         // Calculate winners and update points
         ArrayList<Winner> winners = calculateWinner(players, calculateAverageAndTarget());
 
@@ -325,19 +372,20 @@ public class Scene_Play2 implements Scene {
             winnerNames.setLength(winnerNames.length() - 2);
         }
         p.textSize(40);
-        p.fill(0, 255, 0); // Green for winner
+        p.fill(225, 9, 9); // Green for winner
         p.text("Winner(s): " + winnerNames.toString(), p.width / 2, 400);
 
         // Display each player's points
+        p.fill(255);
         for (int i = 0; i < players.size(); i++) {
-            p.text("Player " + (i + 1) + " Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
+            p.text("Player " + (i + 1) + " Total Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
         }
     }
-
+    }
     public void endRound() {
       calculateAverageAndTarget();
        calculateWinner(players,calculateAverageAndTarget());
-
+winnerCalculated =true;
         // Increment the round counter
         round++;
     }
@@ -351,8 +399,7 @@ public class Scene_Play2 implements Scene {
                 currentPlayerIndex = 0;
             }
             winnerCalculated = false; // Reset the flag for the new round
-            Scene_Play scenePlay = new Scene_Play(p, players, game);
-            game.setScene(scenePlay); // Transition to the next scene
+            game.nextScene();
         }
     }
 
