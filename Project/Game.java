@@ -265,7 +265,7 @@ public class Game extends PApplet {
         // Create players and add them to the ArrayList
         players.add(new Player("Player 1", playerImages.get(0), this));
         players.add(new Player("Player 2", playerImages.get(1), this));
-        players.add(new Player("Player 3", playerImages.get(2), this));
+        players.add(new Player("King", playerImages.get(2), this));
 
         // Initialize scenes
         scenes.add(new Scene_Start(this));
@@ -297,6 +297,11 @@ public class Game extends PApplet {
             current = 0; // Loops back to the first scene if at the end
         }
     }
+    public void setCurrentScene(int index) {
+    if (index >= 0 && index < scenes.size()) {
+        current = index; // Change to the specified scene
+    }
+}
     
  public void setScene(Scene newScene) {
         this.currentScene = newScene; // Update the current scene

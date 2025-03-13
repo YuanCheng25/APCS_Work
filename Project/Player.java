@@ -391,6 +391,7 @@ public Player(String name, PImage playerImage, PApplet p) {
     public boolean isInputComplete() { return inputComplete; }
     public int getValue() { return value; }
   public boolean hasLostPoint() {return hasLostPoint; }
+    public String setInput() {return input;}
 
     public void setHasLostPoint(boolean hasLostPoint) {
         this.hasLostPoint = hasLostPoint;
@@ -449,6 +450,10 @@ public Player(String name, PImage playerImage, PApplet p) {
 
     public void setValue(int value) {
         this.value = value;
+    }
+    
+    public void setInput(String input) {
+        this.input=input;
     }
 
     public void setInputComplete(boolean inputComplete) {

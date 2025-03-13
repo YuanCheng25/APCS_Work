@@ -252,8 +252,11 @@ public class Scene_Play2 implements Scene {
     private boolean fadingOut2 = false; 
     private Gif round1Gif; 
     private PImage roundImage;
-
-
+    private String input;
+    
+String text2=". . .";
+    int n=0;
+    
     public Scene_Play2(PApplet p, ArrayList<Player> players, Game game) {
         this.p = p;
         this.game = (Game) p;
@@ -319,7 +322,7 @@ public class Scene_Play2 implements Scene {
         float fadeSpeed = 0.1f;
         
         if (fadingIn2) {
-            cardAlpha2 += 7; 
+            cardAlpha2 += 9; 
             if (cardAlpha2 >= 255) {
                 cardAlpha2 = 255;  
                 fadingIn2 = false;
@@ -332,7 +335,7 @@ public class Scene_Play2 implements Scene {
                 fadingOut2 = true;
             }
         } else if (fadingOut2) {
-            cardAlpha2 -= 2;  
+            cardAlpha2 -= 3;  
             if (cardAlpha2 <= 0) {
                 cardAlpha2 = 0;  
                 fadingOut2 = false;  
@@ -347,6 +350,26 @@ public class Scene_Play2 implements Scene {
         p.text("Round " + round, p.width / 2, p.height/2+150);
        // p.image(roundImage, (p.width - roundImage.width) / 2, p.height/2-300, roundImage.width, roundImage.height);
         p.image(round1Gif, (p.width - round1Gif.width) / 2, p.height/2-230, round1Gif.width, round1Gif.height);
+        
+        p.textSize(30);
+        p.textAlign(PApplet.LEFT);
+        p.fill(225,9,9, cardAlpha2);
+        p.text("Loading", p.width/2-110, p.height/2+250);
+       
+        if (n > text2.length()) 
+                n = text2.length();
+        
+            String sub2 = text2.substring(0, n);
+        p.text(sub2, p.width / 2 + 30, p.height / 2 + 250);
+
+  
+         /*  if (p.frameCount % 10 == 0)
+                n++;*/
+        
+        if (p.frameCount % 15 == 0) 
+        n++;
+    
+        
         p.noTint();
         
        
@@ -354,6 +377,7 @@ public class Scene_Play2 implements Scene {
         {  
         p.textSize(35);
         p.fill(255);
+        p.textAlign(PApplet.CENTER, PApplet.CENTER);
         p.text("Target (Average * 0.8): " + calculateAverageAndTarget(), p.width / 2, 150);
 
         // Display each player's input
@@ -378,28 +402,33 @@ public class Scene_Play2 implements Scene {
         // Display each player's points
         p.fill(255);
         for (int i = 0; i < players.size(); i++) {
-            p.text("Player " + (i + 1) + " Total Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
+            p.text(players.get(i).getName() + " Total Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
         }
     }
     }
     public void endRound() {
-      calculateAverageAndTarget();
+     /* calculateAverageAndTarget();
        calculateWinner(players,calculateAverageAndTarget());
-winnerCalculated =true;
+winnerCalculated =true;*/
         // Increment the round counter
+    //     player.setInputComplete(false); 
         round++;
     }
 
     public void keyPressed() {
         if (p.key == PApplet.TAB) {
+         game.setScene(new Scene_Play(game, players, game));
+            currentPlayerIndex = 0;
+            players.get(currentPlayerIndex).display();
             endRound();
-            for (Player player : players) {
-                player.setInputComplete(false); // Reset input completion for the next round
+           /* for (Player player : players) {
+                player.setInputComplete(false); 
+                player.setInput("0");
                 player.setValue(0);
-                currentPlayerIndex = 0;
-            }
-            winnerCalculated = false; // Reset the flag for the new round
-            game.nextScene();
+            }*/
+         //   winnerCalculated = false; 
+            //  currentPlayerIndex = 0;
+        //  players.get(currentPlayerIndex).display();
         }
     }
 

@@ -63,12 +63,13 @@ public class Scene_Start implements Scene
 
 //p.image(backgroundGif, (p.width-backgroundGif.width)/2,0,backgroundGif.width,backgroundGif.height);
         
-p.fill(255);
 p.textFont(customFont);
 p.textSize(60);
 p.textAlign(PApplet.CENTER);
-p.text("The Average Game", p.width/2,p.height-200);
+p.fill(225,9,9);
+p.text("Balance", p.width/2,p.height-200);
 p.textSize(30);
+p.fill(255);
 p.text("Press 'Enter' to Begin", p.width/2,p.height-300);
     }
     
