@@ -239,10 +239,6 @@ public class Game extends PApplet {
         smooth(2);
         fullScreen();
     }
-
-  /*      public void setPlayers(ArrayList<Player> players) {
-        this.players = new ArrayList<>();
-    }*/
     
     public void setup() {
         scenes = new ArrayList<Scene>();
@@ -250,28 +246,27 @@ public class Game extends PApplet {
         currentScene = new Scene_Play(this, players, this);
 
 
-        // Load player images into the ArrayList
         current = 0;
 
         music = new SoundFile(this, "chopin.mp3");
         music.loop();
 
-        // Load player images
         playerImages = new ArrayList<>();
         playerImages.add(loadImage("eye2.png")); // Replace with your image file path
         playerImages.add(loadImage("chess2.png")); // Replace with your image file path
         playerImages.add(loadImage("cat.png")); // Replace with your image file path
 
-        // Create players and add them to the ArrayList
         players.add(new Player("Player 1", playerImages.get(0), this));
         players.add(new Player("Player 2", playerImages.get(1), this));
         players.add(new Player("King", playerImages.get(2), this));
 
-        // Initialize scenes
         scenes.add(new Scene_Start(this));
         scenes.add(new Scene_Rules(this));
         scenes.add(new Scene_Play(this, players, this));
         scenes.add(new Scene_Play2(this, players, this));
+      //  scenes.add(new Scene_Elimination(this, players, this));
+    //  scenes.add(new Scene_Elimination2(this, players, this));
+        //  scenes.add(new Scene_Ending(this, players, this));
     }
 
     public void draw() {
@@ -281,7 +276,7 @@ public class Game extends PApplet {
 
     public void keyPressed() {
         if (key == ENTER) {
-            nextScene(); // Move to the next scene when ENTER is pressed
+            nextScene(); 
 
             // Check if the current player's input is complete
       /*      if (players.get(currentPlayerIndex).isInputComplete()) {
@@ -294,14 +289,15 @@ public class Game extends PApplet {
     public void nextScene() {
         current++;
         if (current >= scenes.size()) {
-            current = 0; // Loops back to the first scene if at the end
+            current=0; 
         }
     }
-    public void setCurrentScene(int index) {
+    
+   /* public void setCurrentScene(int index) {
     if (index >= 0 && index < scenes.size()) {
         current = index; // Change to the specified scene
     }
-}
+}*/
     
  public void setScene(Scene newScene) {
         this.currentScene = newScene; // Update the current scene

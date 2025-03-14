@@ -402,7 +402,7 @@ String text2=". . .";
         // Display each player's points
         p.fill(255);
         for (int i = 0; i < players.size(); i++) {
-            p.text(players.get(i).getName() + " Total Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
+            p.text(players.get(i).getName() + "'s Total Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
         }
     }
     }
@@ -417,18 +417,16 @@ winnerCalculated =true;*/
 
     public void keyPressed() {
         if (p.key == PApplet.TAB) {
-         game.setScene(new Scene_Play(game, players, game));
-            currentPlayerIndex = 0;
-            players.get(currentPlayerIndex).display();
             endRound();
-           /* for (Player player : players) {
+           for (Player player : players) {
                 player.setInputComplete(false); 
-                player.setInput("0");
+                player.setInput(" ");
                 player.setValue(0);
-            }*/
+            }
          //   winnerCalculated = false; 
-            //  currentPlayerIndex = 0;
-        //  players.get(currentPlayerIndex).display();
+        game.setScene(new Scene_Play(p, players, game));
+        currentPlayerIndex = 0;
+      //  players.get(currentPlayerIndex).display();
         }
     }
 
