@@ -1,238 +1,3 @@
-/*import processing.core.*;
-import java.util.ArrayList;
-
-public class Scene_Play2 implements Scene {
-    private PApplet p;
-    private ArrayList<Player> players;
-    private int round;
-    private double average;
-    private double target;
-    private Game game;
-    private int value;
-    private int current;
-    private Player winner; // Store the winner for display
-        private int currentPlayerIndex = 0;
-    private ArrayList<Winner> winners;
-    //    private Scene currentScene;
-        private ArrayList<Scene> scenes;
-private boolean winnerCalculated = false;
-
-
-    public Scene_Play2(PApplet p, ArrayList<Player> players, Game game) {
-        this.p = p;
-        this.game = (Game) p;
-       // this.players = new ArrayList<>();
-        this.players = players;
-        this.round = 1;
-       // this.winner = null; // Initialize winner as null
-    
-
-    // Method to set players from Scene_Play
-   // public void setPlayers(ArrayList<Player> players) {
-     //   this.players = players;
-   //     this.calculateAverageAndTarget(); // Calculate average and target when players are set
-    //    this.calculateWinner(); // Determine the winner immediately
-    }
- public double calculateAverageAndTarget() {
-        // Calculate the average and target (average * 0.8)
-        int total = 0;
-      //  double average=0.0;
-        double target=0.0;
-        for (Player player : players) {
-            total += player.getValue();
-        } 
-        target += (total / players.size())*0.8; // Ensure floating-point division
-       return target;// target += average * 0.8f;
-    }
-
-       /* public void calculateWinner() {
-        winner = players.get(0);
-        double closestDiff = Math.abs(winner.getValue() - target);
-
-        for (Player player : players) {
-            double diff = Math.abs(player.getValue() - target);
-            if (diff < closestDiff) {
-                winner = player;
-                closestDiff = diff;
-            }
-        }
-
-        // Update points
-        for (Player player : players) {
-            if (player == winner) {
-                player.setPoints(player.getPoints() + 1); // Winner gains 1 point
-            } else {
-                player.setPoints(player.getPoints() - 1); // Losers lose 1 point
-            }
-        }
-    }*/
-    
-    
-    /*public ArrayList<Winner> winners calculateWinner(ArrayList<Player> players, double target) {
-        ArrayList<Winner> winners=new ArrayList w<>();
-    Player winner = players.get(0);
-    double closestDiff = Math.abs(winner.getValue() - target);
-
-    for (Player player : players) {
-        double diff = Math.abs(player.getValue() - target);
-        if (diff < closestDiff) {
-            winner = player;
-            closestDiff = diff;
-        }
-        w.add(player.getName());
-        return w;
-    }
-
-    // Update points
-    for (Player player : players) {
-        if (player == winner) {
-            player.setPoints(player.getPoints() + 1); // Winner gains 1 point
-        } else {
-            player.setPoints(player.getPoints() - 1); // Losers lose 1 point
-        }
-    }
-
-    return winner; // Return the winner
-}*/
-
-/*public static ArrayList<Winner> calculateWinner(ArrayList<Player> players, double target) {
-        ArrayList<Winner> winners = new ArrayList<>();
-        double closestDiff = Double.MAX_VALUE; // Initialize with the largest possible difference
-        // Find the closest difference to the target
-        for (Player player : players) {
-            double diff = Math.abs(player.getValue() - target);
-            if (diff < closestDiff) {
-                closestDiff = diff; // Update the closest difference
-            }
-        }
-
-        // Add all players with the closest difference to the winners list
-        for (Player player : players) {
-            double diff = Math.abs(player.getValue() - target);
-            if (diff == closestDiff) {
-                winners.add(new Winner(player.getName()));
-            }
-        //boolean isWinner = false; // Declare isWinner for each player
-        for (Winner winner : winners) {
-            if (winner.getName().equals(player.getName())) {
-          player.setPoints(player.getPoints() + 0); // Winner gains 1 point
-        } else {
-           player.setPoints(player.getPoints() - 1); // Losers lose 1 point
-        }
-    }
-   // return winners; // Return the winners list
-}
-    return winners;
-
-}
-    
-       /* // Update points for all players
-         for (Player player : players) {
-        boolean isWinner = false;
-        for (Winner winner : winners) {
-            if (winner.getName().equals(player.getName())) {
-                isWinner = true;
-                break;
-            }
-        }
-         }
-        if (isWinner) {
-            player.setPoints(player.getPoints() + 1); // Winner gains 1 point
-        } else {
-            player.setPoints(player.getPoints() - 1); // Losers lose 1 point
-        }
-    
-
-        return winners;
-    }*/
-    
-   /* public void display() {
-        p.background(0);
-        p.fill(255);
-        // Display round information
-        p.textSize(32);
-        p.textAlign(PApplet.CENTER, PApplet.CENTER);
-        p.text("Round: " + round, p.width / 2, 50);
-     //   p.text("Average: " + average, p.width / 2, 100);
-        p.text("Target (Average * 0.8): " + calculateAverageAndTarget(), p.width / 2, 150);
-
-        // Display each player's input
-        for (int i = 0; i < players.size(); i++) {
-            p.text("Player " + (i + 1) + " Input: " + players.get(i).getValue(), p.width / 2, 200 + (i * 50));
-        }
-        
-    ArrayList<Winner> winners = calculateWinner(players, calculateAverageAndTarget());
-    
-
-    StringBuilder winnerNames = new StringBuilder();
-    for (Winner winner : winners) {
-        winnerNames.append(winner.getName()).append(", ");
-    }
-
-    // Remove the trailing comma and space if there are winners
-    if (winnerNames.length() > 0) {
-        winnerNames.setLength(winnerNames.length() - 2);
-    }
-
-            p.textSize(40);
-            p.fill(0, 255, 0); // Green for winner
-            p.text("Winner(s): " + winnerNames.toString(), p.width / 2, 400);
-        
-        
-         for (int i = 0; i < players.size(); i++) {
-        p.text("Player " + (i + 1) + " Points: " + players.get(i).getPoints(), p.width / 2, 450 + (i * 50));
-    }
-    }
-    
-    public void endRound() {
-    // Calculate the target value for this round
-    double target = calculateAverageAndTarget();
-
-    // Calculate the winner(s) and update points
-    ArrayList<Winner> winners = calculateWinner(players, target);
-  //  updatePlayerPoints(players, winners);
-
-    // Display the winner(s) (optional, for debugging)
-    StringBuilder winnerNames = new StringBuilder();
-    for (Winner winner : winners) {
-        winnerNames.append(winner.getName()).append(", ");
-    }
-    if (winnerNames.length() > 0) {
-        winnerNames.setLength(winnerNames.length() - 2);
-    }
-    System.out.println("Winner(s): " + winnerNames.toString());
-
-    // Increment the round counter
-    round++;
-}
-
-    public void keyPressed() {
-        // Move to next round or scene when Enter key is pressed
-        if (p.key == PApplet.TAB) {
-endRound();
-            for (Player player : players) {
-                player.setInputComplete(false); // Reset input completion for the next round
-                player.setValue(0);
-                currentPlayerIndex=0;
-            }
-                    winnerCalculated = false; // Reset the flag for the new round
-            Scene_Play scenePlay = new Scene_Play(p, players, game);
-            game.setScene(scenePlay); // Transition to the next scene
-        }
-    }
-
-
-
-    public int getPlayerIndex(Player player) {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i) == player) {
-                return i;
-            }
-        }
-        return -1; // Return -1 if the player is not found
-    }
-}*/
-
 import processing.core.*;
 import java.util.ArrayList;
 import gifAnimation.*;
@@ -251,6 +16,7 @@ public class Scene_Play2 implements Scene {
     private boolean visible2 = false; 
     private boolean fadingOut2 = false; 
     private Gif round1Gif; 
+    private Gif round2Gif;
     private PImage roundImage;
     private String input;
     
@@ -265,9 +31,26 @@ String text2=". . .";
         
       round1Gif=new Gif(p,"card.gif");
       round1Gif.loop();
+       round2Gif=new Gif(p,"gum.gif");
+        round2Gif.loop();
         //roundImage=p.loadImage("girl.png");
     }
 
+    public void resetFadeEffect() {
+        cardAlpha2 = 0; 
+        fadingIn2 = true; 
+        visible2 = false;
+        fadingOut2 = false; 
+        n=0;
+    }
+    
+    private Gif getCurrentRoundGif() {
+    if (round%2 == 0) {
+        return round2Gif;
+    } else 
+        return round1Gif; 
+    }
+    
     public double calculateAverageAndTarget() {
         int total = 0;
         for (Player player : players) {
@@ -288,7 +71,6 @@ String text2=". . .";
             }
         }
 
-        // Add all players with the closest difference to the winners list
         for (Player player : players) {
             double diff = Math.abs(player.getValue() - target);
             if (diff == closestDiff) {
@@ -296,7 +78,6 @@ String text2=". . .";
             }
         }
 
-        // Update points for all players
         for (Player player : players) {
             boolean isWinner = false;
             for (Winner winner : winners) {
@@ -306,9 +87,9 @@ String text2=". . .";
                 }
             }
             if (isWinner) {
-                player.setPoints(player.getPoints() + 0); // Winner gains 1 point
+                player.setPoints(player.getPoints() + 0); 
             } else if (!player.hasLostPoint()) {
-                player.setPoints(player.getPoints() - 1); // Losers lose 1 point
+                player.setPoints(player.getPoints() - 1); 
                 player.setHasLostPoint(true);
             }
         }
@@ -348,8 +129,8 @@ String text2=". . .";
         p.textSize(60);
         p.textAlign(PApplet.CENTER, PApplet.CENTER);
         p.text("Round " + round, p.width / 2, p.height/2+150);
-       // p.image(roundImage, (p.width - roundImage.width) / 2, p.height/2-300, roundImage.width, roundImage.height);
-        p.image(round1Gif, (p.width - round1Gif.width) / 2, p.height/2-230, round1Gif.width, round1Gif.height);
+        Gif currentGif = getCurrentRoundGif();
+        p.image(currentGif, (p.width - currentGif.width) / 2, p.height/2-230, currentGif.width, currentGif.height);
         
         p.textSize(30);
         p.textAlign(PApplet.LEFT);
@@ -361,10 +142,6 @@ String text2=". . .";
         
             String sub2 = text2.substring(0, n);
         p.text(sub2, p.width / 2 + 30, p.height / 2 + 250);
-
-  
-         /*  if (p.frameCount % 10 == 0)
-                n++;*/
         
         if (p.frameCount % 15 == 0) 
         n++;
@@ -384,10 +161,9 @@ String text2=". . .";
         for (int i = 0; i < players.size(); i++) {
             p.text("Player " + (i + 1) + " Input: " + players.get(i).getValue(), p.width / 2, 200 + (i * 50));
         }
-        // Calculate winners and update points
+    
         ArrayList<Winner> winners = calculateWinner(players, calculateAverageAndTarget());
 
-        // Display winner(s)
         StringBuilder winnerNames = new StringBuilder();
         for (Winner winner : winners) {
             winnerNames.append(winner.getName()).append(", ");
@@ -396,7 +172,7 @@ String text2=". . .";
             winnerNames.setLength(winnerNames.length() - 2);
         }
         p.textSize(40);
-        p.fill(225, 9, 9); // Green for winner
+        p.fill(225, 9, 9); 
         p.text("Winner(s): " + winnerNames.toString(), p.width / 2, 400);
 
         // Display each player's points
@@ -407,11 +183,10 @@ String text2=". . .";
     }
     }
     public void endRound() {
-     /* calculateAverageAndTarget();
-       calculateWinner(players,calculateAverageAndTarget());
-winnerCalculated =true;*/
-        // Increment the round counter
-    //     player.setInputComplete(false); 
+  for (Player player : players) {
+            player.setHasLostPoint(false);
+        }
+        calculateWinner(players, calculateAverageAndTarget());
         round++;
     }
 
@@ -420,13 +195,13 @@ winnerCalculated =true;*/
             endRound();
            for (Player player : players) {
                 player.setInputComplete(false); 
-                player.setInput(" ");
+                player.setInput("");
                 player.setValue(0);
             }
-         //   winnerCalculated = false; 
-        game.setScene(new Scene_Play(p, players, game));
-        currentPlayerIndex = 0;
-      //  players.get(currentPlayerIndex).display();
+       Scene_Play scenePlay = (Scene_Play) game.getScene(2); // Assuming Scene_Play is at index 2
+            scenePlay.resetToPlayer1();
+            resetFadeEffect();
+           game.setCurrentScene(2);
         }
     }
 

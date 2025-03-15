@@ -25,7 +25,7 @@ public class Scene_Rules implements Scene
     {
         this.p = p;
     //    RulesboardImage = p.loadImage("K.png");
-        cardImage = p.loadImage("normal2.png");  
+        cardImage = p.loadImage("michelangelo.png");  
         customFont = p.createFont("slkscr.ttf", 45); 
     //    Avatar = p.loadImage("bunny.png");
         normal=p.loadImage("arcade2.png");
@@ -68,7 +68,8 @@ public class Scene_Rules implements Scene
         float cardHeight = cardWidth * (356.0f / 244.0f); 
         float cardX = p.width / 10;
         float cardY = (p.height - cardHeight) / 2;
-        p.image(cardImage, p.width/2-(cardImage.width/2), p.height-cardImage.height-180, cardImage.width, cardImage.height); 
+    //    p.image(cardImage, p.width/2-(cardImage.width/2), p.height-cardImage.height-180, cardImage.width, cardImage.height); 
+        p.image(cardImage, p.width/2-(cardImage.width/2)+80, p.height-500, cardImage.width/1.4f, cardImage.height/1.4f); 
 
         p.textFont(customFont);
         p.textAlign(PApplet.CENTER); 
@@ -81,11 +82,11 @@ public class Scene_Rules implements Scene
         float textY = cardY; // Move text closer to the card
          p.fill(225,9,9, cardAlpha);
          p.textSize(40);
-        p.text("Inspired by 'Alice in Borderland' S2:E6", textX+200, textY+150);
+        p.text("Inspired by 'Alice in Borderland' S2:E6", textX+200, textY+80);
         p.fill(255,cardAlpha);
         p.textSize(30);
-        p.text("Music: 'Waltz No. 3 in A Minor, Op. 34 No. 2' by Frederic Chopin", textX+200, textY + 230);
-        p.text("Coded by Sally Cheng", textX+200, textY + 310);
+        p.text("Music: 'Waltz No. 3 in A Minor, Op. 34 No. 2' by Frederic Chopin", textX+200, textY + 160);
+        p.text("Coded by Sally Cheng", textX+200, textY + 240);
 
         p.noTint();
         
