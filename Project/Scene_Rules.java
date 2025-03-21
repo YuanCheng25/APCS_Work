@@ -25,7 +25,7 @@ public class Scene_Rules implements Scene
     {
         this.p = p;
     //    RulesboardImage = p.loadImage("K.png");
-        cardImage = p.loadImage("michelangelo.png");  
+        cardImage = p.loadImage("angel.png");  
         customFont = p.createFont("slkscr.ttf", 45); 
     //    Avatar = p.loadImage("bunny.png");
         normal=p.loadImage("arcade2.png");
@@ -69,7 +69,7 @@ public class Scene_Rules implements Scene
         float cardX = p.width / 10;
         float cardY = (p.height - cardHeight) / 2;
     //    p.image(cardImage, p.width/2-(cardImage.width/2), p.height-cardImage.height-180, cardImage.width, cardImage.height); 
-        p.image(cardImage, p.width/2-(cardImage.width/2)+80, p.height-500, cardImage.width/1.4f, cardImage.height/1.4f); 
+        p.image(cardImage, p.width/2-(cardImage.width/2), p.height-500, cardImage.width/1.2f, cardImage.height/1.2f); 
 
         p.textFont(customFont);
         p.textAlign(PApplet.CENTER); 

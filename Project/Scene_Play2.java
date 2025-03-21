@@ -33,7 +33,6 @@ String text2=". . .";
       round1Gif.loop();
        round2Gif=new Gif(p,"gum.gif");
         round2Gif.loop();
-        //roundImage=p.loadImage("girl.png");
     }
 
     public void resetFadeEffect() {
@@ -182,6 +181,7 @@ String text2=". . .";
         }
     }
     }
+    
     public void endRound() {
   for (Player player : players) {
             player.setHasLostPoint(false);

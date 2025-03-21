@@ -29,7 +29,7 @@ public class Game extends PApplet {
         music.loop();
 
         playerImages = new ArrayList<>();
-        playerImages.add(loadImage("eye2.png")); 
+        playerImages.add(loadImage("spider.png")); 
         playerImages.add(loadImage("chess2.png")); 
         playerImages.add(loadImage("cat.png")); 
 
@@ -41,8 +41,6 @@ public class Game extends PApplet {
         scenes.add(new Scene_Rules(this));
         scenes.add(new Scene_Play(this, players, this));
         scenes.add(new Scene_Play2(this, players, this));
-      //  scenes.add(new Scene_Elimination(this, players, this));
-    //  scenes.add(new Scene_Elimination2(this, players, this));
         //  scenes.add(new Scene_Ending(this, players, this));
     }
 

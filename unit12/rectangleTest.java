@@ -5,7 +5,7 @@ public class rectangleTest {
             { new Rectangle("Rect3", 2.0, 8.0), new Rectangle("Rect4", 3.0, 10.0) }
         };
 
-        System.out.println("Average Perimeter: " + averagePerimeter(rectangles));
-        System.out.println("Rectangle with Largest Area: " + largestArea(rectangles));
+        System.out.println("Average Perimeter: " + Rectangle.averagePerimeter(rectangles));
+        System.out.println("Rectangle with Largest Area: " + Rectangle.largestArea(rectangles).getName());
     }
 }
