@@ -25,7 +25,7 @@ public class Scene_Rules implements Scene
     {
         this.p = p;
     //    RulesboardImage = p.loadImage("K.png");
-        cardImage = p.loadImage("angel.png");  
+        cardImage = p.loadImage("normal2.png");  
         customFont = p.createFont("slkscr.ttf", 45); 
     //    Avatar = p.loadImage("bunny.png");
         normal=p.loadImage("arcade2.png");

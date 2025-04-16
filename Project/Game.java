@@ -29,7 +29,7 @@ public class Game extends PApplet {
         music.loop();
 
         playerImages = new ArrayList<>();
-        playerImages.add(loadImage("spider.png")); 
+        playerImages.add(loadImage("eye2.png")); 
         playerImages.add(loadImage("chess2.png")); 
         playerImages.add(loadImage("cat.png")); 
 
