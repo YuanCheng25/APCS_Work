@@ -1,25 +1,5 @@
 import java.util.ArrayList;
 
-// Part a: Shape class
-class Shape {
-    private String name;
-    private int numSides;
-    
-    public Shape(String name, int numSides) {
-        this.name = name;
-        this.numSides = numSides;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public int getNumSides() {
-        return numSides;
-    }
-}
-
-// Part b: ShapeCollection class
 class ShapeCollection {
     private ArrayList<Shape> shapes;
     
@@ -32,7 +12,6 @@ class ShapeCollection {
         shapes.add(shape);
     }
     
-    // Look up shape by name and return number of sides
     public int numberOfSides(String shapeName) {
         for (Shape shape : shapes) {
             if (shape.getName().equals(shapeName)) {
