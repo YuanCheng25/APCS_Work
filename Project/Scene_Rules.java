@@ -13,29 +13,22 @@ public class Scene_Rules implements Scene
     private boolean visible = false; 
     private boolean fadingOut = false; 
     private PFont customFont;
-   // private PImage Avatar;
     private PImage normal;
-  // private SoundFile music2;
    
-    String text = "All 3 players must choose a number from 0-100. The average is multiplied by 0.8; the winner is the person with the number closest to the average*0.8. Everyone starts at 0 points; each round, the winners get no points and the losers lose 1 point. When someone reaches -2 points, they are eliminated. Players 1 and 2 must eliminate the King to win the game.";
+    String text = "All 3 players must choose a number from 0-100. The average is multiplied by 0.8; the winner is the person with the number closest to the average*0.8. Everyone starts at 0 points; each round, the winners get no points and the losers lose 1 point. When someone reaches -3 points, they are eliminated. Check ending after two players are eliminated.";
    
     int n = 0;
    
     public Scene_Rules(PApplet p)
     {
         this.p = p;
-    //    RulesboardImage = p.loadImage("K.png");
         cardImage = p.loadImage("normal2.png");  
         customFont = p.createFont("slkscr.ttf", 45); 
-    //    Avatar = p.loadImage("bunny.png");
         normal=p.loadImage("arcade2.png");
-      //   music2 = new SoundFile(p, "typing.mp3");
-            // ChishiyaGif = new Gif(p, "ChishiyaBetter.gif");
     }
 
     public void display()
     {
-      //  p.image(RulesboardImage, 0, 0, p.width, p.height);
       p.fill(0);
         
         float fadeSpeed = 0.1f;
@@ -68,14 +61,10 @@ public class Scene_Rules implements Scene
         float cardHeight = cardWidth * (356.0f / 244.0f); 
         float cardX = p.width / 10;
         float cardY = (p.height - cardHeight) / 2;
-    //    p.image(cardImage, p.width/2-(cardImage.width/2), p.height-cardImage.height-180, cardImage.width, cardImage.height); 
         p.image(cardImage, p.width/2-(cardImage.width/2), p.height-500, cardImage.width/1.2f, cardImage.height/1.2f); 
 
         p.textFont(customFont);
         p.textAlign(PApplet.CENTER); 
-
-       /* float textX = p.width / 2 + 50; 
-        float textY = p.height / 3; */
         
         
         float textX = cardX + cardWidth; 
@@ -95,16 +84,6 @@ public class Scene_Rules implements Scene
             p.tint(255, 255);
             
             p.image(normal,0,0, p.width, p.height);
-            
-    /*     float avatarWidth = p.width / 1.2f; // Increase the width to make the image larger
-        float avatarHeight = avatarWidth * (Avatar.height / (float) Avatar.width); // Maintain aspect ratio
-          float avatarX = p.width - avatarWidth - 30; // Move further into lower-right
-            float avatarY = p.height - avatarHeight - 30; // Move further into lower-right
-            p.image(Avatar, avatarX+430, avatarY+100, avatarWidth, avatarHeight);*/
-      //  p.image(Avatar, p.width - lowerRightImageWidth, p.height - lowerRightImageHeight, lowerRightImageWidth, lowerRightImageHeight);
-            // p.image(ChishiyaGif, 670, 50, p.width / 2, p.height + 100);
-            // ChishiyaGif.loop();
-            
        
           
             p.fill(255);  
@@ -112,8 +91,6 @@ public class Scene_Rules implements Scene
             p.textSize(35);
             
             
-      //   p.text("How to Play: Everyone must choose a number from 0-100. The average is taken and multiplied by 0.8; the winner is the person with the number closest to the average*0.8. Everyone starts at 0 points; each round, the winners get no points and the losers lose 1 point. When someone reaches -2 points, they are eliminated. The last person left is the winner.", 190, 140, textX+200, textY + 400);
-
          if (n > text.length()) 
                 n = text.length();
         

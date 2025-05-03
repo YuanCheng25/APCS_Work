@@ -24,9 +24,9 @@ public class Scene_Play implements Scene {
     
      public void resetToPlayer1() {
         currentPlayerIndex = 0; // Reset to Player 1
-        input = ""; // Clear input
-        value = 0; // Reset value
-        inputComplete = false; // Reset input completion flag
+        input = ""; 
+        value = 0; 
+        inputComplete = false; 
     }
 
     public void display() {
@@ -55,16 +55,11 @@ public class Scene_Play implements Scene {
                     players.get(currentPlayerIndex).setValue(value);
                     inputComplete = true; // Mark input as complete
 
-                    // Set the value for the current player
-
-                    // Check if the current player is Player 3 (index 2)
                    
                     if (currentPlayerIndex == 2 && p.key == ' ') { // Player 3 is index 2
                         Scene_Play2 scenePlay2 = new Scene_Play2(p, players, game);
-                       // scenePlay2.setPlayers(players); // Pass the list of players
                         game.setScene(scenePlay2); // Transition to Scene_Play2
-                        //game.nextScene();
-                        return; // Exit the method to avoid further processing
+                        return; 
                         
                     }
 
@@ -73,11 +68,10 @@ public class Scene_Play implements Scene {
                     input = ""; 
                 }
             } catch (NumberFormatException e) {
-                // Handle invalid input (e.g., non-numeric input)
                 input = ""; // Clear input
             }
         } else if (Character.isDigit(p.key)) {
-            input += p.key; // Append digit to input
+            input += p.key; 
         }
     }
     

@@ -41,7 +41,7 @@ public class Game extends PApplet {
         scenes.add(new Scene_Rules(this));
         scenes.add(new Scene_Play(this, players, this));
         scenes.add(new Scene_Play2(this, players, this));
-        //  scenes.add(new Scene_Ending(this, players, this));
+        scenes.add(new Scene_Ending(this));
     }
 
     public void draw() {

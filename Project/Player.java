@@ -6,7 +6,6 @@ import processing.core.PImage;
 public class Player implements Scene {
     private String name;
     private int points = 0;
-    private boolean isAlive;
     private int currentNumber;
     private String input = "";
     private int value = 0;
@@ -21,7 +20,6 @@ public Player(String name, PImage playerImage, PApplet p) {
     this.playerImage = playerImage;
     this.p = p;
     this.points = 0;
-    this.isAlive = true;
     this.currentNumber = -1;
     this.input = "";
     this.value = 0;
@@ -29,10 +27,9 @@ public Player(String name, PImage playerImage, PApplet p) {
     this.hasLostPoint = false; // Initialize to false
     
 }
-    
+
     public String getName() { return name; }
     public int getPoints() { return points; }
-    public boolean getIsAlive() { return isAlive; }
     public int getCurrentNumber() { return currentNumber; }
     public boolean isInputComplete() { return inputComplete; }
     public int getValue() { return value; }
@@ -63,18 +60,18 @@ public Player(String name, PImage playerImage, PApplet p) {
 
         // Display the image
         p.image(playerImage, x, y, imageWidth, imageHeight);
-
-        // Display instructions and input
-        p.fill(255);
-        p.text(name + ", enter an integer between 0-100:", p.width / 2, 600);
-        p.fill(225, 9, 9);
-        p.text("Note: Do not let other players see your response!", p.width / 2, 650);
-        p.fill(255);
-        p.text("Input: " + input, p.width / 2, 700);
-        p.text("Value: " + value, p.width / 2, 750);
-        p.text("Press 'Space' upon completion", p.width / 2, 850);
-        p.text("to confirm your choice.", p.width / 2, 900);
+  
+            p.text(name + ", enter an integer between 0-100:", p.width / 2, 600);
+            p.fill(225, 9, 9);
+            p.text("Note: Do not let other players see your response!", p.width / 2, 650);
+            p.fill(255);
+            p.text("Input: " + input, p.width / 2, 700);
+            p.text("Value: " + value, p.width / 2, 750);
+            p.text("Press 'Space' upon completion", p.width / 2, 850);
+            p.text("to confirm your choice.", p.width / 2, 900);
+        
     }
+
 
     public void keyPressed() {
         if (p.key == PApplet.BACKSPACE && input.length() > 0) {
@@ -112,6 +109,5 @@ public Player(String name, PImage playerImage, PApplet p) {
 
     public void losePoints() {
         points--;
-        if (points <= -3) isAlive = false; // Eliminated when points reach -3
     }
 }

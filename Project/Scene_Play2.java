@@ -173,6 +173,9 @@ String text2=". . .";
         p.textSize(40);
         p.fill(225, 9, 9); 
         p.text("Winner(s): " + winnerNames.toString(), p.width / 2, 400);
+        p.fill(255,255,255);
+        p.text("Press 'TAB' to start the next round.", p.width/2, 700);
+        p.text("Press 'ENTER' to end game.", p.width/2, 800);
 
         // Display each player's points
         p.fill(255);
@@ -182,10 +185,9 @@ String text2=". . .";
     }
     }
     
+    
     public void endRound() {
-  for (Player player : players) {
-            player.setHasLostPoint(false);
-        }
+
         calculateWinner(players, calculateAverageAndTarget());
         round++;
     }
@@ -198,11 +200,15 @@ String text2=". . .";
                 player.setInput("");
                 player.setValue(0);
             }
+
        Scene_Play scenePlay = (Scene_Play) game.getScene(2); // Assuming Scene_Play is at index 2
             scenePlay.resetToPlayer1();
             resetFadeEffect();
            game.setCurrentScene(2);
         }
+    if(p.key==PApplet.ENTER) {
+        game.setCurrentScene(3);
+    }
     }
 
     public int getPlayerIndex(Player player) {
